@@ -4,5 +4,4 @@ class Event < ApplicationRecord
     def tickets_available
         ticket_quantity - bookings.sum(:booking_quantity)
     end
-
 end

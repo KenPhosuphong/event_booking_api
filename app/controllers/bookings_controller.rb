@@ -2,7 +2,7 @@ class BookingsController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound do
     render json: { error: "Event not found" }, status: :not_found
   end
-  
+
   def index
     bookings = Booking.all
 
@@ -15,10 +15,9 @@ class BookingsController < ActionController::API
       }
     }
   end
-  
+
   def create
     ActiveRecord::Base.transaction do
-      
       event = Event.lock.find(params[:event_id])
       booking = event.bookings.build(booking_params)
 
