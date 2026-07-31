@@ -17,6 +17,12 @@
         -H "Content-Type: application/json" \
         -d '{"email":"me@test.com","booking_quantity":4}'
 
+## Data modeling
+
+I don't store "tickets left" as a column. It's calculated as
+`ticket_quantity - sum of bookings`. That way bookings are the single
+source of truth and the number can't drift out of sync if something
+fails halfway.
 
 ## How I handle concurrency
 
