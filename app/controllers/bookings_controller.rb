@@ -1,6 +1,22 @@
 class BookingsController < ActionController::API
-  def create
+  rescue_from ActiveRecord::RecordNotFound do
+    render json: { error: "Event not found" }, status: :not_found
+  end
+  
+  def index
+    bookings = Booking.all
 
+    render json: bookings.map { |booking|
+      {
+        id: booking.id,
+        email: booking.email,
+        booking_quantity: booking.booking_quantity,
+        event: booking.event.name
+      }
+    }
+  end
+  
+  def create
     ActiveRecord::Base.transaction do
       
       event = Event.lock.find(params[:event_id])
@@ -21,5 +37,4 @@ class BookingsController < ActionController::API
   def booking_params
     params.permit(:email, :booking_quantity)
   end
-
 end

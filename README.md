@@ -1,5 +1,6 @@
 
 
+
 ## How I handle concurrency
 
 The problem: if two users request the last ticket at the same time, both
@@ -13,3 +14,9 @@ Then the lock. If user A and user B request at the exact same time, the
 row gets locked for one of them. The other waits until that request is
 done, then re-reads the real count and gets rejected.
 https://api.rubyonrails.org/classes/ActiveRecord/Locking/Pessimistic.html
+
+
+## What I add in extra
+
+I have added get bookings path to make it easier to see what bookings we have now and 
+next is validation due to if email and booking_quantity is nou nil and booking_quantity most greater than 0
