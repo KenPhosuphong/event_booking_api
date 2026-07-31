@@ -1,4 +1,21 @@
+## Setup
 
+    bundle install
+    bin/rails db:create db:migrate db:seed
+    bin/rails server
+
+## Endpoints
+
+    GET  /events                    list events with tickets available
+    GET  /events/:id                one event
+    POST /events/:id/bookings       book tickets
+    GET  /bookings                  list all bookings
+
+    Example:
+
+        curl -X POST http://localhost:3000/events/1/bookings \
+        -H "Content-Type: application/json" \
+        -d '{"email":"me@test.com","booking_quantity":4}'
 
 
 ## How I handle concurrency
@@ -16,7 +33,9 @@ done, then re-reads the real count and gets rejected.
 https://api.rubyonrails.org/classes/ActiveRecord/Locking/Pessimistic.html
 
 
-## What I add in extra
+## Extras
 
-I have added get bookings path to make it easier to see what bookings we have now and 
-next is validation due to if email and booking_quantity is nou nil and booking_quantity most greater than 0
+I added a `GET /bookings` endpoint to make it easier to see all bookings.
+
+I also added validations: email and booking_quantity must not be nil, and
+booking_quantity must be greater than 0.
