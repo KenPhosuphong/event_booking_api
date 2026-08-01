@@ -1,4 +1,3 @@
-# test/integration/bookings_test.rb
 require "test_helper"
 
 class BookingsTest < ActionDispatch::IntegrationTest
