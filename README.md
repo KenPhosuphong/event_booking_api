@@ -4,6 +4,11 @@
     bin/rails db:create db:migrate db:seed
     bin/rails server
 
+## Test
+
+    bin/rails db:test:prepare
+    bin/rails test
+
 ## Endpoints
 
     GET  /events                    list events with tickets available
