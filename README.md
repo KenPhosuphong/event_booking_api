@@ -45,3 +45,11 @@ I added a `GET /bookings` endpoint to make it easier to see all bookings.
 
 I also added validations: email and booking_quantity must not be nil, and
 booking_quantity must be greater than 0.
+
+#### If I had more time
+
+Add cancel booking
+
+Add user accounts. to let user see their own bookings.
+
+or money transaction :P
