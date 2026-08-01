@@ -4,7 +4,7 @@ class BookingsController < ActionController::API
   end
 
   def index
-    bookings = Booking.all
+    bookings = Booking.includes(:event)
 
     render json: bookings.map { |booking|
       {
