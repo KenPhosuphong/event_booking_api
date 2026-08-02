@@ -10,7 +10,18 @@ class EventsController < ActionController::API
 
   def show
     event = Event.find(params[:id])
-    render json: event_json(event)
+    booked = Booking.where(event_id: event.id).sum(:booking_quantity)
+    render json: event_json(event, event.ticket_quantity - booked)
+  end
+
+  def update
+    event = Event.find(params[:id])
+    if event.update(event_params)
+      booked = Booking.where(event_id: event.id).sum(:booking_quantity)
+      render json: event_json(event, event.ticket_quantity - booked)
+    else
+      render json: { errors: event.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
@@ -22,5 +33,9 @@ class EventsController < ActionController::API
       date: event.date,
       tickets_available: available || event.tickets_available
     }
+  end
+
+  def event_params
+    params.permit(:name, :date, :ticket_quantity)
   end
 end
