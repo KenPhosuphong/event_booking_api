@@ -31,6 +31,14 @@ class BookingsController < ActionController::API
     end
   end
 
+  def destroy
+    booking = Booking.find(params[:id])
+    booking.destroy
+    render json: { message: "Booking deleted successfully" }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Booking not found" }, status: :not_found
+  end
+
   private
 
   def booking_params

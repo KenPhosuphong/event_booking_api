@@ -14,13 +14,29 @@
     GET  /events                    list events with tickets available
     GET  /events/:id                one event
     POST /events/:id/bookings       book tickets
+    PUT  /events/:id                update an event's data
     GET  /bookings                  list all bookings
+    DELETE /bookings/:id            cancel bookings
+
+    This is a small project so I didn't add bruno/postman file we will test using bash 
 
     Example:
+
+        POST
 
         curl -X POST http://localhost:3000/events/1/bookings \
         -H "Content-Type: application/json" \
         -d '{"email":"me@test.com","booking_quantity":4}'
+
+        PUT
+
+        curl -X PUT http://localhost:3000/events/1 \
+        -H "Content-Type: application/json" \
+        -d '{"name":"Updated Event Name"}'
+        
+        DELETE
+
+        curl -X DELETE http://localhost:3000/bookings/1
 
 ## Data modeling
 
@@ -51,10 +67,14 @@ I added a `GET /bookings` endpoint to make it easier to see all bookings.
 I also added validations: email and booking_quantity must not be nil, and
 booking_quantity must be greater than 0.
 
+## MORE Extras
+
+I also added delete and put method because I want this to be CRUD backend example
+
 ## If I had more time
 
-Add cancel booking
+Add tests for cancel booking and event update
 
-Add user accounts. to let user see their own bookings.
+Add user accounts, to let users see their own bookings.
 
-or money transaction :P
+or money transaction

@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   get  "/events",                    to: "events#index"
   get  "/events/:id",                to: "events#show"
   post "/events/:event_id/bookings", to: "bookings#create"
+  put  "/events/:id",                to: "events#update"
   get "/bookings",                   to: "bookings#index"
+  delete "/bookings/:id",            to: "bookings#destroy"
 end
